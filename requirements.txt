@@ -1,0 +1,7 @@
+# Requisitos para API FastAPI
+fastapi
+uvicorn
+
+# Requisitos para Frontend Flask
+flask
+requests

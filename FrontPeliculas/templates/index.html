@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Películas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #fff;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+            margin-bottom: 10px;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .movie-info {
+            flex-grow: 1;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .movie-info strong {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .actions a, .actions button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .actions a:hover, .actions button:hover {
+            background-color: #0056b3;
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+            padding: 8px 12px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Listado de Películas</h1>
+        <a href="{{ url_for('crear') }}">Agregar nueva película</a>
+        <ul>
+            {% for peli in peliculas %}
+                <li>
+                    <div class="movie-info">
+                        <strong>{{ peli.titulo }}</strong> ({{ peli.anio }}) - {{ peli.genero }} [{{ peli.clasificacion }}]
+                    </div>
+                    <div class="actions">
+                       
+                        <a href="{{ url_for('editar', id=peli.id) }}">Editar</a>
+                        <form action="{{ url_for('eliminar', id=peli.id) }}" method="post" style="display:inline;">
+                            <button type="submit">Eliminar</button>
+                        </form>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

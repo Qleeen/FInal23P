@@ -43,11 +43,7 @@ def editar_pelicula(pelicula_id: int, pelicula: schemas.PeliculaUpdate, db: Sess
     return crud.update_pelicula(db, pelicula_id, pelicula)
 
 @app.delete("/peliculas/{pelicula_id}")
-def eliminar_pelicula(
-    pelicula_id: int,
-    db: Session = Depends(get_db),
-    current_user: str = Depends(get_current_user)  
-):
+def eliminar_pelicula(pelicula_id: int, db: Session = Depends(get_db)):
     result = crud.delete_pelicula(db, pelicula_id)
     if not result:
         raise HTTPException(status_code=404, detail="Película no encontrada")
